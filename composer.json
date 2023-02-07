@@ -1,17 +1,22 @@
 {
-    "name": "orhanerday/open-ai",
-    "description": "OpenAI GPT-3 Api Client in PHP",
+    "name": "lyhiving/open-ai",
+    "description": "OpenAI GPT-3 Api Client in PHP inorge SSL check",
     "keywords": [
-        "orhanerday",
+        "lyhiving",
         "open-ai"
     ],
-    "homepage": "https://github.com/orhanerday/open-ai",
+    "homepage": "https://github.com/lyhiving/open-ai",
     "license": "MIT",
     "authors": [
         {
             "name": "Orhan Erday",
             "email": "orhanerday@gmail.com",
             "role": "Developer"
+        },
+        {
+            "name": "lyhiving",
+            "email": "lyhiving@gmail.com",
+            "role": "Fixer"
         }
     ],
     "require": {
@@ -26,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Orhanerday\\OpenAi\\": "src"
+            "lyhiving\\OpenAi\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Orhanerday\\OpenAi\\Tests\\": "tests"
+            "lyhiving\\OpenAi\\Tests\\": "tests"
         }
     },
     "scripts": {

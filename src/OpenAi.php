@@ -380,6 +380,8 @@ class OpenAi
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_POSTFIELDS => $post_fields,
             CURLOPT_HTTPHEADER => $this->headers,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_SSL_VERIFYHOST => 0
         ];
 
         if ($opts == []) {

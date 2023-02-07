@@ -3,21 +3,23 @@
 
 <br />
 
-*A message from creator,<br />Thank you for visiting the __@orhanerday/open-ai__ repository! We are thrilled to see that it has been downloaded nearly 30k times. If you find this repository helpful or useful, we encourage you to **star** it on GitHub. Starring a repository is a way to show your support for the project. It also helps to increase the visibility of the project and to let the community know that it is valuable. Thanks again for your support and we hope you find the repository useful! <br /><br /> Orhan*
+*A message from creator,<br />Thank you for visiting the __@lyhiving/open-ai__ repository! We are thrilled to see that it has been downloaded nearly 30k times. If you find this repository helpful or useful, we encourage you to **star** it on GitHub. Starring a repository is a way to show your support for the project. It also helps to increase the visibility of the project and to let the community know that it is valuable. Thanks again for your support and we hope you find the repository useful! <br /><br /> Orhan*
+
+<br />
+
+<br />
+<br />
+
+
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/lyhiving/open-ai.svg?style=flat-square)](https://packagist.org/packages/lyhiving/open-ai)
+[![Total Downloads](https://img.shields.io/packagist/dt/lyhiving/open-ai.svg?style=flat-square)](https://packagist.org/packages/lyhiving/open-ai)
 
 <br />
 
 <br />
 
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/orhanerday/open-ai.svg?style=flat-square)](https://packagist.org/packages/orhanerday/open-ai)
-[![Total Downloads](https://img.shields.io/packagist/dt/orhanerday/open-ai.svg?style=flat-square)](https://packagist.org/packages/orhanerday/open-ai)
-
-<br />
-
-<br />
-
-<img src="./openai-elephpant.svg" width="1250" height="300" alt="orhanerday-open-ai-logo">
+<img src="./openai-elephpant.svg" width="1250" height="300" alt="lyhiving-open-ai-logo">
 
 <br />
 
@@ -26,9 +28,9 @@
 
 # Comparison With Other Packages
 
-| Project Name           | Required PHP Version | Downloads                                                                                                                                                                     | Description                                                                                                                                                 | Type (Official / Community) | Support                                                                                                                                |
+| Project Name           | Required PHP Version | Downloads                                                                                                                                                                     | Decription                                                                                                                                                 | Type (Official / Community) | Support                                                                                                                                |
 |------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| **orhanerday/open-ai** | **PHP 7.4+**         | **[![Total Downloads](https://img.shields.io/packagist/dt/orhanerday/open-ai.svg?style=flat-square)](https://packagist.org/packages/orhanerday/open-ai) <br>🚀nearly 35K 🚀** | **Most downloaded, forked, contributed, huge community supported, and used PHP SDK for OpenAI GPT-3 and DALL-E. It also supports chatGPT-like streaming.** | Community                   | Available, ([Community driven Discord Server](https://discord.gg/xpGUD528XJ) or personal mail [orhan@duck.com](mailto:orhan@duck.com)) |
+| **lyhiving/open-ai** | **PHP 7.4+**         | **[![Total Downloads](https://img.shields.io/packagist/dt/lyhiving/open-ai.svg?style=flat-square)](https://packagist.org/packages/lyhiving/open-ai) <br>🚀nearly 30K 🚀** | **Most downloaded, forked, contributed, huge community supported, and used PHP SDK for OpenAI GPT-3 and DALL-E. It also supports chatGPT-like streaming.** | Community                   | Available, ([Community driven Discord Server](https://discord.gg/mtY2jCsQgx) or personal mail [orhan@duck.com](mailto:orhan@duck.com)) |
 | openai-php/client      | PHP 8.1+             | <a href="https://packagist.org/packages/openai-php/client"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/openai-php/client"></a>                        | OpenAI PHP API client.                                                                                                                                     | Community                   | -                                                                                                                                      |
 
 
@@ -44,15 +46,15 @@ Fully open-source and secure community-maintained, PHP SDK for accessing the Ope
 
 ## News
 
-- orhanerday/open-ai added to community libraries php [section](https://beta.openai.com/docs/libraries/php).
-- orhanerday/open-ai featured on [PHPStorm blog post](https://blog.jetbrains.com/phpstorm/2022/12/php-annotated-december-2022/#:~:text=orhanerday/open%2Dai%20%E2%80%93%20A%20PHP%20SDK%20for%20accessing%20the%20OpenAI%20GPT%2D3%20API), thanks JetBrains! 
+- lyhiving/open-ai added to community libraries php [section](https://beta.openai.com/docs/libraries/php).
+- lyhiving/open-ai featured on [PHPStorm blog post](https://blog.jetbrains.com/phpstorm/2022/12/php-annotated-december-2022/#:~:text=lyhiving/open%2Dai%20%E2%80%93%20A%20PHP%20SDK%20for%20accessing%20the%20OpenAI%20GPT%2D3%20API), thanks JetBrains! 
 
 > Requires PHP 7.4+
 
 ## Join our discord server
 ![Discord Banner 2](https://discordapp.com/api/guilds/1047074572488417330/widget.png?style=banner2)
 
-[Click here to join the Discord server](https://discord.gg/xpGUD528XJ)
+[Click here to join the Discord server](https://discord.gg/mtY2jCsQgx)
 
 ## Support this project
 
@@ -68,7 +70,7 @@ If you have benefited from using OpenAI PHP and would like to support its contin
 * [Click here for the Coinbase QR](#eth) **Ethereum** > 0x135E2D5d7AC40c6850f844BA589D68e91a268Ceb
 
 
-Thank you for considering a donation to Orhanerday/OpenAI PHP SDK. Your support is greatly appreciated and helps to ensure that the project can continue to grow and improve.
+Thank you for considering a donation to lyhiving/OpenAI PHP SDK. Your support is greatly appreciated and helps to ensure that the project can continue to grow and improve.
 
 *Sincerely,*
 
@@ -113,7 +115,7 @@ Thank you for considering a donation to Orhanerday/OpenAI PHP SDK. Your support 
 You can install the package via composer:
 
 ```bash
-composer require orhanerday/open-ai
+composer require lyhiving/open-ai
 ```
 ## Quick Start
 Before you get starting, you should set OPENAI_API_KEY as ENV key, and set OpenAI key as env value with the following commands;
@@ -141,7 +143,7 @@ Create your `index.php` file and paste the following code part into the file.
 
 require __DIR__ . '/vendor/autoload.php'; // remove this line if you use a PHP Framework.
 
-use Orhanerday\OpenAi\OpenAi;
+use lyhiving\OpenAi\OpenAi;
 
 $open_ai_key = getenv('OPENAI_API_KEY');
 $open_ai = new OpenAi($open_ai_key);
@@ -172,7 +174,7 @@ php -S localhost:8000 -t .
 > According to the following code `$open_ai` is the base variable for all open-ai operations.
 
 ```php
-use Orhanerday\OpenAi\OpenAi;
+use lyhiving\OpenAi\OpenAi;
 
 $open_ai = new OpenAi(env('OPEN_AI_API_KEY'));
 ```
@@ -266,7 +268,7 @@ Creates a new edit for the provided input, instruction, and parameters
 ```
 
 ## Images (DALL·E)
-> All DALL·E Examples available in this [repo](https://github.com/orhanerday/DALLE-Examples).
+> All DALL·E Examples available in this [repo](https://github.com/lyhiving/DALLE-Examples).
 
 Given a prompt, the model will return one or more generated images as urls or base64 encoded.
 
@@ -282,7 +284,7 @@ $complete = $open_ai->image([
 ```
 ### Create image edit
 Creates an edited or extended image given an original image and a prompt.
-> You need HTML upload for image edit or variation? Please check [DALL·E Examples](https://github.com/orhanerday/DALLE-Examples)
+> You need HTML upload for image edit or variation? Please check [DALL·E Examples](https://github.com/lyhiving/DALLE-Examples)
 ````php
 $otter = curl_file_create(__DIR__ . './files/otter.png');
 $mask = curl_file_create(__DIR__ . './files/mask.jpg');
@@ -444,7 +446,7 @@ $result = $open_ai->uploadFile([
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-use Orhanerday\OpenAi\OpenAi;
+use lyhiving\OpenAi\OpenAi;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ob_clean();
