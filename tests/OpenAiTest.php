@@ -1,7 +1,7 @@
 <?php
 
 
-use Orhanerday\OpenAi\OpenAi;
+use lyhiving\OpenAi\OpenAi;
 
 $open_ai = new OpenAi('OPEN-AI-KEY');
 

@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Orhanerday\\OpenAi\\": "src"
+            "lyhiving\\OpenAi\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Orhanerday\\OpenAi\\Tests\\": "tests"
+            "lyhiving\\OpenAi\\Tests\\": "tests"
         }
     },
     "scripts": {
