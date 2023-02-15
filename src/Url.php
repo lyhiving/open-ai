@@ -8,6 +8,15 @@ class Url
     public const API_VERSION = 'v1';
     public const OPEN_AI_URL = self::ORIGIN . "/" . self::API_VERSION;
 
+
+    /**
+     * @return string
+     */
+    public static function basicURL(int $opt=0): string
+    {
+        return $opt ? self::OPEN_AI_URL : self::ORIGIN;
+    }
+
     /**
      * @deprecated
      * @param string $engine

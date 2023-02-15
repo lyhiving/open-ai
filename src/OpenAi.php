@@ -12,6 +12,8 @@ class OpenAi
     private array $contentTypes;
     private int $timeout = 0;
     private object $stream_method;
+    private bool $curlNoHttpsCheck = true;
+    private int $curlRetryMaxTimes = 2;
 
     public function __construct($OPENAI_API_KEY, $OPENAI_ORG = "")
     {
@@ -28,6 +30,26 @@ class OpenAi
         if ($OPENAI_ORG != "") {
             $this->headers[] = "OpenAI-Organization: $OPENAI_ORG";
         }
+    }
+
+
+    /**
+     * @param $opt
+     * @return object
+     */
+    public function setNohttps($opt){
+        $this->curlNoHttpsCheck = $opt;
+        return $this;
+    }
+
+
+    /**
+     * @param $opt
+     * @return object
+     */
+    public function setRetryTimes($opt){
+        $this->curlRetryMaxTimes = $opt;
+        return $this;
     }
 
     /**
@@ -361,8 +383,32 @@ class OpenAi
      */
     private function sendRequest(string $url, string $method, array $opts = [])
     {
-        $post_fields = json_encode($opts);
+        $result = $this->sendRequestNode($url, $method, $opts);
+        $response = $result['response'];
+        if ($result['errno']!== 0 && $this->curlRetryMaxTimes) {
+            for($i=0;$i<$this->curlRetryMaxTimes; $i++){
+                usleep(rand(100,400));
+                $result = $this->sendRequestNode($url, $method, $opts);
+                $response = $result['response'];
+                if($result['errno']==0){
+                    break;
+                }
+            }
+        }   
+        return $response;
+    }
 
+    /**
+     * @param string $url
+     * @param string $method
+     * @param array $opts
+     * @return bool|string
+     */
+
+    private function sendRequestNode(string $url, string $method, array $opts = [])
+    {
+
+        $post_fields = json_encode($opts);
         if (array_key_exists('file', $opts) || array_key_exists('image', $opts)) {
             $this->headers[0] = $this->contentTypes["multipart/form-data"];
             $post_fields = $opts;
@@ -379,10 +425,14 @@ class OpenAi
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_POSTFIELDS => $post_fields,
-            CURLOPT_HTTPHEADER => $this->headers,
-            CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_SSL_VERIFYHOST => 0
+            CURLOPT_HTTPHEADER => $this->headers
         ];
+
+        if($this->curlNoHttpsCheck){
+            $curl_info[CURLOPT_SSL_VERIFYPEER] = false; 
+            $curl_info[CURLOPT_SSL_VERIFYHOST] = 0;
+            $curl_info[CURLOPT_MAXREDIRS] =2;
+        }
 
         if ($opts == []) {
             unset($curl_info[CURLOPT_POSTFIELDS]);
@@ -396,8 +446,8 @@ class OpenAi
 
         curl_setopt_array($curl, $curl_info);
         $response = curl_exec($curl);
+        $curl_errno = curl_errno($curl);
         curl_close($curl);
-
-        return $response;
+        return array('errno'=>$curl_errno, 'response'=>$response);
     }
 }
