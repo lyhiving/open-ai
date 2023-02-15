@@ -14,6 +14,7 @@ class OpenAi
     private object $stream_method;
     private bool $curlNoHttpsCheck = true;
     private int $curlRetryMaxTimes = 2;
+    private bool $comFix = true;
 
     public function __construct($OPENAI_API_KEY, $OPENAI_ORG = "")
     {
@@ -42,13 +43,21 @@ class OpenAi
         return $this;
     }
 
-
     /**
      * @param $opt
      * @return object
      */
     public function setRetryTimes($opt){
         $this->curlRetryMaxTimes = $opt;
+        return $this;
+    }
+
+    /**
+     * @param $opt
+     * @return object
+     */
+    public function setConFix($opt){
+        $this->comFix = $opt;
         return $this;
     }
 
@@ -90,6 +99,7 @@ class OpenAi
     }
 
     /**
+     * fix something make it more like Q&A
      * @param $opts
      * @param null $stream
      * @return bool|string
@@ -109,9 +119,42 @@ class OpenAi
 
         $opts['model'] = $opts['model'] ?? $this->model;
         $url = Url::completionsURL();
-
-        return $this->sendRequest($url, 'POST', $opts);
+        $result = $this->sendRequest($url, 'POST', $opts);
+        if(!$result) return $result;
+        if(!$this->comFix) return $result;
+        $res = json_decode($result);
+        if(!$res||!$res->id||!$res->choices) return $result;
+        $hadwrap = false;
+        foreach($res->choices as $k=>$v){
+            $text = $v->text;
+            $text = str_replace( "\n", '<br />', $text ); 
+            if(!$text) return $result;
+            if(strpos($text,"<br /><br />")===0||strpos($text,"<br /><br />")===false) return $result;
+            $texts = explode('<br /><br />', $text); 
+            $dots =  array('…', '……', '?', '？', '!', '！', '.', '。', ';', '；', '吗', '么', '嘛', '吧', '呢', '呀', '哦', '唉', '嗯', '哈', '怎么样', '么样', '样', '什么', '多少', '少');
+            if($texts && $texts[0] &&(
+                mb_strlen($texts[0]) <=8 ||
+                $texts[0] =='' ||
+                in_array($texts[0], $dots) ||
+                in_array(mb_substr($texts[0],0,1), $dots) ||
+                in_array(mb_substr($texts[0],-1), $dots) ||
+                in_array(mb_substr($texts[0],0,2), $dots) ||
+                in_array(mb_substr($texts[0],-2), $dots) 
+            )){
+                unset($texts[0]);
+                $text = count($texts) ==1 ? $texts[1] : implode('<br /><br />', $texts);
+                $text = str_replace('<br />', "\n", $text );
+                $text = trim($text);
+                $res->choices[$k]->text = $text;
+                $hadwrap = true;
+            }
+        }
+        if(!$hadwrap) return $result;
+        $result = json_encode($res, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        return $result;
     }
+
+    
 
     /**
      * @param $opts
