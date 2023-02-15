@@ -375,13 +375,26 @@ class OpenAi
         $this->timeout = $timeout;
     }
 
+
+    /**
+     * @param string $url
+     * @param string $method
+     * @param array $opts
+     * @return bool|string
+     * must be public for use
+     */
+    public function doRequest(string $url, string $method, array $opts = [])
+    {
+        return $this->sendRequest($url, $method, $opts);
+    }
+
     /**
      * @param string $url
      * @param string $method
      * @param array $opts
      * @return bool|string
      */
-    private function sendRequest(string $url, string $method, array $opts = [])
+    public function sendRequest(string $url, string $method, array $opts = [])
     {
         $result = $this->sendRequestNode($url, $method, $opts);
         $response = $result['response'];
