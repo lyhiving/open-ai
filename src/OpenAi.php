@@ -105,7 +105,7 @@ class OpenAi
      * @return bool|string
      * @throws Exception
      */
-    public function completion($opts, $stream = null)
+    public function completions($opts, $stream = null)
     {
         if ($stream != null && array_key_exists('stream', $opts)) {
             if (! $opts['stream']) {
@@ -119,7 +119,23 @@ class OpenAi
 
         $opts['model'] = $opts['model'] ?? $this->model;
         $url = Url::completionsURL();
-        $result = $this->sendRequest($url, 'POST', $opts);
+        $isMyAI = false;
+        if(strpos($opts['model'],'@')){
+            $models = explode('@', $opts['model']);
+            $case = $models[1];
+            if(isset($_ENV['ROUTER_PATH']) && $_ENV['ROUTER_PATH']){
+                $rfile = $_ENV['ROUTER_PATH'].'/'.$case.'.ai.php';
+                if(is_readable($rfile)){
+                    $isMyAI = true;
+                    require_once $rfile;
+                    $_case = $case.'AI';
+                    $myAI =  new $_case();
+                    $result = $myAI->run($opts);
+                }
+            }
+            $opts['model'] = $models[0];
+        }
+        if(!$isMyAI) $result = $this->sendRequest($url, 'POST', $opts);
         if(!$result) return $result;
         if(!$this->comFix) return $result;
         $res = json_decode($result);
