@@ -17,6 +17,7 @@ class Url
         return $opt ? self::OPEN_AI_URL : self::ORIGIN;
     }
 
+
     /**
      * @deprecated
      * @param string $engine
@@ -93,6 +94,24 @@ class Url
      * @param
      * @return string
      */
+    public static function transcriptionsUrl(): string
+    {
+        return self::OPEN_AI_URL . "/audio/transcriptions";
+    }
+
+    /**
+     * @param
+     * @return string
+     */
+    public static function translationsUrl(): string
+    {
+        return self::OPEN_AI_URL . "/audio/translations";
+    }
+
+    /**
+     * @param
+     * @return string
+     */
     public static function filesUrl(): string
     {
         return self::OPEN_AI_URL . "/files";
@@ -141,5 +160,14 @@ class Url
     public static function embeddings(): string
     {
         return self::OPEN_AI_URL . "/embeddings";
+    }
+
+    /**
+     * @param
+     * @return string
+     */
+    public static function chatUrl(): string
+    {
+        return self::OPEN_AI_URL . "/chat/completions";
     }
 }
