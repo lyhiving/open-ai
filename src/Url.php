@@ -1,10 +1,12 @@
 <?php
 
-namespace lyhiving\OpenAi;
 
+namespace lyhiving\OpenAi;
+if(!defined('OPENAI_URL')) define('OPENAI_URL','https://api.openai.com');
+    
 class Url
 {
-    public const ORIGIN = defined('OPENAI_URL') && OPENAI_URL? OPENAI_URL : 'https://api.openai.com';
+    public const ORIGIN = OPENAI_URL;
     public const API_VERSION = 'v1';
     public const OPEN_AI_URL = self::ORIGIN . "/" . self::API_VERSION;
 
