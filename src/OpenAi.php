@@ -12,7 +12,7 @@ class OpenAi
     private array $headers;
     private array $contentTypes;
     private int $timeout = 0;
-    private  $stream_method = "";
+    private object $stream_method;
     private string $customUrl = "";
     private string $proxy = "";
     private array $curlInfo = [];
@@ -120,8 +120,8 @@ class OpenAi
      */
     public function completions($opts, $stream = null)
     {
-        if ($stream != null && array_key_exists('stream', $opts)) {
-            if (!$opts['stream']) {
+        if (array_key_exists('stream', $opts) && $opts['stream']) {
+            if ($stream == null) {
                 throw new Exception(
                     'Please provide a stream function. Check https://github.com/orhanerday/open-ai#stream-example for an example.'
                 );
@@ -187,7 +187,7 @@ class OpenAi
     }
 
 
-        /**
+    /**
      * @param        $opts
      * @param  null  $stream
      * @return bool|string
@@ -195,8 +195,8 @@ class OpenAi
      */
     public function completion($opts, $stream = null)
     {
-        if ($stream != null && array_key_exists('stream', $opts)) {
-            if (!$opts['stream']) {
+        if (array_key_exists('stream', $opts) && $opts['stream']) {
+            if ($stream == null) {
                 throw new Exception(
                     'Please provide a stream function. Check https://github.com/orhanerday/open-ai#stream-example for an example.'
                 );
@@ -696,7 +696,7 @@ class OpenAi
      * @param  array   $opts
      * @return bool|string
      */
-    private function sendRequestNode(string $url, string $method, array $opts = [])
+    private function sendRequest(string $url, string $method, array $opts = [])
     {
         $post_fields = json_encode($opts);
 
@@ -749,7 +749,10 @@ class OpenAi
         $response = curl_exec($curl);
         $curl_errno = curl_errno($curl);
         curl_close($curl);
-        return array('errno'=>$curl_errno, 'response'=>$response);
+
+        if (!$response) throw new Exception(curl_error($curl));
+        
+        return $response;
     }
 
     /**

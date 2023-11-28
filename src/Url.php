@@ -2,13 +2,13 @@
 
 
 namespace lyhiving\OpenAi;
-if(!defined('OPENAI_URL')) define('OPENAI_URL','https://api.openai.com');
+if(!defined('OPEN_AI_URL')) define('OPEN_AI_URL','https://api.openai.com/v1');
     
 class Url
 {
-    public const ORIGIN = OPENAI_URL;
+    public const ORIGIN = 'https://api.openai.com';
     public const API_VERSION = 'v1';
-    public const OPEN_AI_URL = self::ORIGIN . "/" . self::API_VERSION;
+    public const OPEN_AI_URL = OPEN_AI_URL;
 
 
     /**
@@ -125,7 +125,7 @@ class Url
      */
     public static function fineTuneUrl(): string
     {
-        return self::OPEN_AI_URL . "/fine-tunes";
+        return self::OPEN_AI_URL . "/fine_tuning/jobs";
     }
 
     /**
