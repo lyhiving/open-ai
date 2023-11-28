@@ -696,7 +696,7 @@ class OpenAi
      * @param  array   $opts
      * @return bool|string
      */
-    private function sendRequest(string $url, string $method, array $opts = [])
+    private function sendRequestNode(string $url, string $method, array $opts = [])
     {
         $post_fields = json_encode($opts);
 
@@ -749,11 +749,9 @@ class OpenAi
         $response = curl_exec($curl);
         $curl_errno = curl_errno($curl);
         curl_close($curl);
-
-        if (!$response) throw new Exception(curl_error($curl));
-        
-        return $response;
+        return array('errno'=>$curl_errno, 'response'=>$response);
     }
+
 
     /**
      * @param  string  $url
