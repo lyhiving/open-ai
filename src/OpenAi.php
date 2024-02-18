@@ -749,6 +749,12 @@ class OpenAi
         $response = curl_exec($curl);
         $curl_errno = curl_errno($curl);
         curl_close($curl);
+        $rets = json_decode($response, true);
+        if($rets){
+            if(isset($rets['detail'][0]['type']) && strpos($rets['detail'][0]['type'],'_error')){
+                $curl_errno = 500;
+            }
+        }
         return array('errno'=>$curl_errno, 'response'=>$response);
     }
 
