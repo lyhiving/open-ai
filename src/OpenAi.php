@@ -12,7 +12,7 @@ class OpenAi
     private array $headers;
     private array $contentTypes;
     private int $timeout = 0;
-    private object $stream_method;
+    private  $stream_method = "";
     private string $customUrl = "";
     private string $proxy = "";
     private array $curlInfo = [];
@@ -120,8 +120,8 @@ class OpenAi
      */
     public function completions($opts, $stream = null)
     {
-        if (array_key_exists('stream', $opts) && $opts['stream']) {
-            if ($stream == null) {
+        if ($stream != null && array_key_exists('stream', $opts)) {
+            if (!$opts['stream']) {
                 throw new Exception(
                     'Please provide a stream function. Check https://github.com/orhanerday/open-ai#stream-example for an example.'
                 );
@@ -187,7 +187,7 @@ class OpenAi
     }
 
 
-    /**
+        /**
      * @param        $opts
      * @param  null  $stream
      * @return bool|string
@@ -195,8 +195,8 @@ class OpenAi
      */
     public function completion($opts, $stream = null)
     {
-        if (array_key_exists('stream', $opts) && $opts['stream']) {
-            if ($stream == null) {
+        if ($stream != null && array_key_exists('stream', $opts)) {
+            if (!$opts['stream']) {
                 throw new Exception(
                     'Please provide a stream function. Check https://github.com/orhanerday/open-ai#stream-example for an example.'
                 );
@@ -353,6 +353,7 @@ class OpenAi
             $opts['model'] = $models[0];
         }
         if(!$isMyAI) $result = $this->sendRequest($url, 'POST', $opts);
+        // file_put_contents(ROOT_PATH.'/pp2.log', var_export([date('Y-m-d H:i:s'), ['----测试返回---', $rfile, $opts, $_ENV, $isMyAI, $result]], true), FILE_APPEND);
         if(!$result) return $result;
         if(!$this->comFix) return $result;
         $res = json_decode($result);
@@ -757,7 +758,6 @@ class OpenAi
         }
         return array('errno'=>$curl_errno, 'response'=>$response);
     }
-
 
     /**
      * @param  string  $url
